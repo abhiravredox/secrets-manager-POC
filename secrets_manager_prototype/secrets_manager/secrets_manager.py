@@ -37,6 +37,8 @@ class SecretsManager(metaclass=Singleton):
             raise EnvironmentError(env_name + " not registered with SecretsManager")
 
     def register(self, env_name, src, auto_reload=False, payload=None, headers=None):
+        if self.deploy_env is None:
+            self.deploy_env = env_name
         self.env_configs[env_name] = (src, auto_reload, payload, headers)
         if not self.lazy_loading:
             self.load_secrets(env_name)

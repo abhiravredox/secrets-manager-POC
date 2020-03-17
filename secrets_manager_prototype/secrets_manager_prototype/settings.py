@@ -16,7 +16,7 @@ from secrets_manager.secrets_manager import SecretsManager
 
 BASE_DIR = Path(__file__).resolve(strict=True).parents[1]
 ENV_DIR = Path(__file__).resolve(strict=True).parents[0]
-secrets_manager = SecretsManager(ENV_DIR, "dev_api_post")
+secrets_manager = SecretsManager(ENV_DIR)
 secrets_manager.register("base", 'base.py')
 secrets_manager.set_base("base")
 secrets_manager.register("dev_env", '.DEV')

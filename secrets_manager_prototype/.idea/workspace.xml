@@ -4,6 +4,8 @@
     <list default="true" id="e67d5e95-e73c-4f2d-b1a0-6f0475f2a86a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/secrets_manager/secrets_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/secrets_manager/secrets_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/secrets_manager_prototype/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/secrets_manager_prototype/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/secrets_manager_prototype/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/secrets_manager_prototype/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,12 +103,23 @@
       <option name="presentableId" value="Default" />
       <updated>1584120129049</updated>
       <workItem from="1584120141330" duration="10828000" />
-      <workItem from="1584203845683" duration="36215000" />
+      <workItem from="1584203845683" duration="36993000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="440" y="190" key="#Notifications" timestamp="1584120609492">
