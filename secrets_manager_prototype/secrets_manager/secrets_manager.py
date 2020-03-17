@@ -62,8 +62,15 @@ class SecretsManager(metaclass=Singleton):
         env_name = self.deploy_env if env_name is None else env_name
         env = self.load_secrets(env_name)
         if env.auto_reload:
-            env.reload()
+            self.reload_secrets(env=env)
         secrets = env.secrets
         if self.is_base_set and env_name is not self.base:
             self.get_secrets(self.base).update(secrets)
         return secrets
+
+    def reload_secrets(self, env_name = None, env = None):
+        if env_name is not None:
+            env = self.load_secrets(env_name)
+            env.reload()
+        elif env is not None:
+            env.reload()
