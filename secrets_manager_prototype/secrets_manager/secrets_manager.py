@@ -1,0 +1,69 @@
+import os
+
+from django.core.validators import URLValidator
+
+from secrets_manager.secrets import DotEnvSecret, ModuleSecret, URLSecret
+
+
+class Singleton(type):
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+
+class SecretsManager(metaclass=Singleton):
+
+    def __init__(self, env_dir=None, default_env=None, lazy_loading=True):
+        self.env = {}
+        self.env_configs = {}
+        try:
+            self.deploy_env = os.environ['env']
+        except KeyError:
+            self.deploy_env = default_env
+        self.env_dir = str(env_dir) + "/"
+        self.is_base_set = False
+        self.lazy_loading = lazy_loading
+        self.env_secrets = {}
+        self.base = None
+
+    def set_base(self, env_name):
+        if not self.is_base_set and env_name in self.env_configs:
+            self.is_base_set = True
+            self.base = env_name
+        else:
+            raise EnvironmentError(env_name + " not registered with SecretsManager")
+
+    def register(self, env_name, src, auto_reload=False, payload=None, headers=None):
+        self.env_configs[env_name] = (src, auto_reload, payload, headers)
+        if not self.lazy_loading:
+            self.load_secrets(env_name)
+
+    def load_secrets(self, env_name):
+
+        if env_name not in self.env_secrets:
+            src, auto_reload, _, _ = self.env_configs[env_name]
+            try:
+                validate_url = URLValidator()
+                validate_url(src)
+            except:
+                if src.endswith('.py'):
+                    self.env_secrets[env_name] = ModuleSecret(self.env_dir + src, auto_reload)
+                else:
+                    self.env_secrets[env_name] = DotEnvSecret(self.env_dir + src, auto_reload)
+            else:
+                self.env_secrets[env_name] = URLSecret(*self.env_configs[env_name])
+
+        return self.env_secrets[env_name]
+
+    def get_secrets(self, env_name=None):
+        env_name = self.deploy_env if env_name is None else env_name
+        env = self.load_secrets(env_name)
+        if env.auto_reload:
+            env.reload()
+        secrets = env.secrets
+        if self.is_base_set and env_name is not self.base:
+            self.get_secrets(self.base).update(secrets)
+        return secrets
