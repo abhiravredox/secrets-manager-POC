@@ -27,13 +27,13 @@ secrets_manager.register("prod_mod", 'PROD.py')
 secrets_manager.register("test_mod", 'TEST.py')
 secrets_manager.register("dev_api_get", 'http://127.0.0.1:8000/secrets/DEV/', auto_reload=True)
 secrets_manager.register("prod_api_get", 'http://127.0.0.1:8000/secrets/PROD/', auto_reload=True)
-secrets_manager.register("test_api_get", 'http://127.0.0.1:8000/secrets/TEST/', auto_reload=True)
+secrets_manager.register("test_api_get", 'http://127.0.0.1:8000/secrets/TEST/', auto_reload=False)
 secrets_manager.register("dev_api_post", 'http://127.0.0.1:8000/secrets/', payload='{"env_name":"DEV"}',
                          auto_reload=True)
 secrets_manager.register("prod_api_post", 'http://127.0.0.1:8000/secrets/', payload='{"env_name":"PROD"}',
                          auto_reload=True)
 secrets_manager.register("test_api_post", 'http://127.0.0.1:8000/secrets/', payload='{"env_name":"TEST"}',
-                         auto_reload=True)
+                         auto_reload=False)
 SECRETS = secrets_manager.get_secrets()
 SECRET_KEY = SECRETS['SECRET_KEY']
 # for i in range(5):
@@ -122,6 +122,5 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-
 CORS_ORIGIN_WHITELIST = (
 )

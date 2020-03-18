@@ -1,27 +1,54 @@
 {% extends 'test_app/base.html' %}
+{% load static %}
 {% block left %}
     <div>
-        <h3>Registered Environment Settings</h3>
+        <h5>Click on a row to view corresponding settings:</h5>
 
         {% if registered_env_details %}
-            <table>
+            <table class="registered">
+                <thead>
                 <tr>
                     <th>Environment Name</th>
-                    <th>Auto Reload</th>
-                    <th>Loaded</th>
+                    <th>Secrets Type</th>
+                    <th>Loaded?</th>
+                    <th>Auto_Reload?</th>
+                    <th>Is_Base?</th>
+                    <th>Is_Deployed?</th>
                 </tr>
-                {% for env, auto_load in registered_env_details %}
-                    <tr>
-                        <td><a href="{% url 'registered_show_detail' env %}">{{ env }}</a></td>
-                        <td>{{ auto_load }}</td>
-                        {% if env in loaded_env_names %}
-                            <td>True</td>
-                        {% else %}
-                            <td>False</td>
-                        {% endif %}
+                </thead>
+                <tbody>
+                {% for env, auto_load, type in registered_env_details %}
+                    {% if env == env_name %}
+                        <tr class="active" onclick="location.href='{% url 'registered_show_detail' env %}'">
+                            {% else %}
+                        <tr onclick="location.href='{% url 'registered_show_detail' env %}'">
+                    {% endif %}
+
+                    <td>{{ env }}</td>
+                    <td>{{ type }}</td>
+
+                    {% if env in loaded_env_names %}
+                        <td>True</td>
+                    {% else %}
+                        <td>False</td>
+                    {% endif %}
+                    <td>{{ auto_load }}</td>
+                    {% if env is base_env_name %}
+                        <td>True</td>
+                    {% else %}
+                        <td>False</td>
+                    {% endif %}
+                    {% if env == deployed_env_name %}
+                        <td>True</td>
+                    {% elif env == base_env_name %}
+                        <td>Base</td>
+                    {% else %}
+                        <td>False</td>
+                    {% endif %}
                     </tr>
 
                 {% endfor %}
+                </tbody>
             </table>
         {% else %}
             <p>No environments registered.</p>

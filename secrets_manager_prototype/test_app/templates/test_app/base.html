@@ -9,30 +9,21 @@
 <div id="navbar">
     <h3>Secrets Manager Prototype</h3>
     <ul>
-        <li class={{ deployed_page }}><a href="{% url 'index' %}">View Deployed Environment Settings</a></li>
         <li class={{ registered_page }}><a href="{% url 'registered' %}">View Registered Environment Settings</a></li>
-        <li class={{ loaded_page }}><a href="{% url 'loaded' %}">View Loaded Environment Settings</a></li>
     </ul>
 </div>
-<div id="left">
-    {% block left %}{% endblock %}
-</div>
-{% if display_details %}
-    <div id="right">
-
-        {% block right %}{% endblock %}
+<div id="content">
+{% if loaded_env_names %}
+    <div id="left">
+        {% block left %}{% endblock %}
     </div>
 {% endif %}
+    {% if display_details %}
+        <div id="right">
+            {% block right %}{% endblock %}
+        </div>
 
-{#<script>#}
-{#var header = document.getElementById("navbar");#}
-{#var btns = header.getElementsByClassName("li");#}
-{#for (var i = 0; i < btns.length; i++) {#}
-{#  btns[i].addEventListener("click", function() {#}
-{#  var current = document.getElementsByClassName("active");#}
-{#  current[0].className = current[0].className.replace(" active", "");#}
-{#  this.className += " active";#}
-{#  });#}
-{#}#}
-{#</script>#}
+    {% endif %}
+</div>
+
 </body>

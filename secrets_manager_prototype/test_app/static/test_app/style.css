@@ -1,5 +1,7 @@
 body {
     margin: 0;
+    width: 100%;
+    height: 100%;
 }
 
 #navbar {
@@ -8,6 +10,7 @@ body {
 }
 
 #navbar h3 {
+    padding-top: 1em;
     color: white;
 }
 
@@ -42,16 +45,124 @@ body {
 
 .active {
     background-color: #4CAF50;
+
+}
+
+#content {
+    display: inline-flex;
+    margin: 10px 10px 10px 10px;
+    width: 100%;
+    height: 100%;
 }
 
 #left {
-    float: left;
     width: 50%;
+    float: left;
     padding: 5px 25px;
+    align-content: center;
+}
+
+h1, h2, h3, h4, h5 {
+    text-align: center;
 }
 
 #right {
-    float: right;
     width: 50%;
     padding: 5px 25px;
+    align-content: center;
+}
+
+/*#registered{*/
+/*    text-align: center;*/
+/*}*/
+table.registered .active {
+    background-color: #5fad6c;
+
+}
+
+table.registered tr:active {
+    background-color: #5fad6c;
+    color: #bbbbbb;
+}
+
+table.registered {
+    border: 1px solid;
+    width: 100%;
+    height: 10%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+table.registered td, table.registered th {
+    border: 1px solid;
+    padding: 4px 3px;
+}
+
+table.registered tbody td {
+    font-size: 18px;
+}
+
+table.registered thead th {
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+table.registered thead th:first-child {
+    border-left: none;
+}
+
+table.registered tbody tr:hover {
+    background-color: #ccffcc;
+    cursor: pointer;
+}
+
+table.secrets {
+    margin: 10px 10px 10px 10px;
+    border: 1px solid;
+    width: 100%;
+    height: 10%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+table.secrets td, table.secrets th {
+    border: 1px solid;
+    padding: 4px 3px;
+}
+
+table.secrets tbody td.right_col{
+    word-break: break-word;
+    font-size: 18px;
+    width: 75%;
+}
+
+table.secrets thead th {
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+table.secrets tfoot {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 10px 10px 10px;
+
+}
+
+table.secrets tfoot td {
+    height: 4em;
+    font-size: 14px;
+    text-align: center;
+    background-color: #f2fff2;
+}
+
+table.secrets tfoot .links {
+    text-align: right;
+}
+
+table.secrets tfoot .button {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 5px;
 }

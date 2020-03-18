@@ -1,20 +1,43 @@
+{% load static %}
 <div>
-    <h2>{{ heading }}: {{ env_name }} (auto_reload: {{ display_env.auto_reload }})
-        {% if base %}
-            updates base configuration: {{ base }} (auto_reload: {{ base_env.auto_reload }})
-        {% endif %}</h2>
-    <ul>
-        {% for key, value in secrets.items %}
-            <li>{{ key }} : {{ value }}</li>
-        {% endfor %}
-    </ul>
-</div>
-<div>
-    <table>
+    <h2>'{{ env_name }}' Secrets ({{ env_secrets_type }})</h2>
+
+    <table class="secrets">
+        <thead>
         <tr>
-            <th>
-                <button href="{% url 'reload_registered' env_name 'reload' %}">Force Reload</button>
-            </th>
+            <th>Secret</th>
+            <th>Value</th>
+        </tr>
+        </thead>
+        {% for key, value in secrets.items %}
+            <tr>
+            <td>{{ key }}</td>
+            <td class="right_col">{{ value }}</td>
+        {% endfor %}
+        </tr>
+
+        <tfoot>
+        <tr>
+            <td colspan="2">
+                <button onclick="location.href='{% url 'reload_registered' env_name %}'">Force Reload</button>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+
+
+    <h2>'{{ env_name }}' Registration Details</h2>
+    <table class="secrets">
+        {% for key, value in env_config.items %}
+            <tr>
+            <td>{{ key }}</td>
+            <td class="right_col">{{ value }}</td>
+        {% endfor %}
         </tr>
     </table>
+    {% if base_env_name and base_env_name != env_name %}
+        <br>
+        <p><b>Note: As base settings are set, '{{ env_name }}' appends and overrides base settings,
+            '<a href="{% url 'registered_show_detail' base_env_name %}">{{ base_env_name }}</a>'</b></p>
+    {% endif %}
 </div>
