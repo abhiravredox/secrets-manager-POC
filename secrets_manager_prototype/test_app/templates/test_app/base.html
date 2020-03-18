@@ -1,0 +1,38 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Secrets Manager Prototype</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'test_app/style.css' %}">
+</head>
+<body>
+<div id="navbar">
+    <h3>Secrets Manager Prototype</h3>
+    <ul>
+        <li class={{ deployed_page }}><a href="{% url 'index' %}">View Deployed Environment Settings</a></li>
+        <li class={{ registered_page }}><a href="{% url 'registered' %}">View Registered Environment Settings</a></li>
+        <li class={{ loaded_page }}><a href="{% url 'loaded' %}">View Loaded Environment Settings</a></li>
+    </ul>
+</div>
+<div id="left">
+    {% block left %}{% endblock %}
+</div>
+{% if display_details %}
+    <div id="right">
+
+        {% block right %}{% endblock %}
+    </div>
+{% endif %}
+
+{#<script>#}
+{#var header = document.getElementById("navbar");#}
+{#var btns = header.getElementsByClassName("li");#}
+{#for (var i = 0; i < btns.length; i++) {#}
+{#  btns[i].addEventListener("click", function() {#}
+{#  var current = document.getElementsByClassName("active");#}
+{#  current[0].className = current[0].className.replace(" active", "");#}
+{#  this.className += " active";#}
+{#  });#}
+{#}#}
+{#</script>#}
+</body>

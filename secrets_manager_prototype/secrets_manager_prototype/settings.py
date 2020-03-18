@@ -16,7 +16,7 @@ from secrets_manager.secrets_manager import SecretsManager
 
 BASE_DIR = Path(__file__).resolve(strict=True).parents[1]
 ENV_DIR = Path(__file__).resolve(strict=True).parents[0]
-secrets_manager = SecretsManager(ENV_DIR)
+secrets_manager = SecretsManager(ENV_DIR, default_env='dev_mod')
 secrets_manager.register("base", 'base.py')
 secrets_manager.set_base("base")
 secrets_manager.register("dev_env", '.DEV')
@@ -36,14 +36,12 @@ secrets_manager.register("test_api_post", 'http://127.0.0.1:8000/secrets/', payl
                          auto_reload=True)
 SECRETS = secrets_manager.get_secrets()
 SECRET_KEY = SECRETS['SECRET_KEY']
-print(SECRET_KEY)
-
-for i in range(5):
-    SECRETS = secrets_manager.get_secrets("prod_api_post")
-    SECRET_KEY = SECRETS['SECRET_KEY']
-    print(SECRET_KEY)
-    API_KEY = SECRETS['API_KEY']
-    print(API_KEY)
+# for i in range(5):
+#     SECRETS = secrets_manager.get_secrets("prod_api_post")
+#     SECRET_KEY = SECRETS['SECRET_KEY']
+#     print(SECRET_KEY)
+#     API_KEY = SECRETS['API_KEY']
+#     print(API_KEY)
 
 DEBUG = SECRETS['DEBUG']
 print(DEBUG)
@@ -54,3 +52,76 @@ DATABASES = {
         'NAME': BASE_DIR / SECRETS['DB_DEFAULT_NAME'],
     }
 }
+
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'test_app.apps.SecretsManagerAppConfig'
+]
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+ROOT_URLCONF = 'secrets_manager_prototype.urls'
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+WSGI_APPLICATION = 'secrets_manager_prototype.wsgi.application'
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+STATIC_URL = '/static/'
+
+CORS_ORIGIN_WHITELIST = (
+)

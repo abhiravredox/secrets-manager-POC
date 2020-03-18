@@ -67,7 +67,9 @@ class SecretsManager(metaclass=Singleton):
             self.reload_secrets(env=env)
         secrets = env.secrets
         if self.is_base_set and env_name is not self.base:
-            self.get_secrets(self.base).update(secrets)
+            base = self.get_secrets(self.base)
+            base.update(secrets)
+            return base
         return secrets
 
     def reload_secrets(self, env_name = None, env = None):

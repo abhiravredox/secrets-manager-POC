@@ -1,0 +1,20 @@
+<div>
+    <h2>{{ heading }}: {{ env_name }} (auto_reload: {{ display_env.auto_reload }})
+        {% if base %}
+            updates base configuration: {{ base }} (auto_reload: {{ base_env.auto_reload }})
+        {% endif %}</h2>
+    <ul>
+        {% for key, value in secrets.items %}
+            <li>{{ key }} : {{ value }}</li>
+        {% endfor %}
+    </ul>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>
+                <button href="{% url 'reload_registered' env_name 'reload' %}">Force Reload</button>
+            </th>
+        </tr>
+    </table>
+</div>
