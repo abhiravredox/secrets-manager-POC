@@ -14,6 +14,7 @@ class Singleton(type):
         return cls._instances[cls]
 
 
+
 class SecretsManager(metaclass=Singleton):
 
     def __init__(self, env_dir=None, default_env=None, lazy_loading=True):
@@ -30,7 +31,7 @@ class SecretsManager(metaclass=Singleton):
         self.base = None
 
     def set_base(self, env_name):
-        if not self.is_base_set and env_name in self.env_configs:
+        if env_name in self.env_configs:
             self.is_base_set = True
             self.base = env_name
         else:
@@ -78,3 +79,16 @@ class SecretsManager(metaclass=Singleton):
 
         if env is not None:
             env.reload()
+
+    def unregister(self, env_name):
+        if env_name in self.env_configs:
+            env = self.env_secrets.pop(env_name, None)
+            if env is not None:
+                del env
+            del self.env_configs[env_name]
+        if env_name == self.base:
+            self.base = None
+            self.is_base_set = False
+
+
+

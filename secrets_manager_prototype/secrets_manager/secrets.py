@@ -10,6 +10,7 @@ class SingletonByArgument(type, metaclass=abc.ABCMeta):
 
     def __call__(cls, *args, **kwargs):
         if (args, tuple(kwargs.keys()), tuple(kwargs.values())) not in cls._instances:
+            print("new")
             cls._instances[(args, tuple(kwargs.keys()), tuple(kwargs.values()))] = super(SingletonByArgument,
                                                                                          cls).__call__(*args, **kwargs)
         return cls._instances[(args, tuple(kwargs.keys()), tuple(kwargs.values()))]
