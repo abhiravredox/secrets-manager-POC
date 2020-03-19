@@ -1,3 +1,3 @@
-SECRET_KEY = '*bxe2w8!n8!ieqaj-29ss5gh=jcmlna=i96xfa1q%lk477mp/PROD_MOD'
+SECRET_KEY = "*bxe2w8!n8!ieqaj-29ss5gh=jcmlna=i96xfa1q%lk477mp/PROD_MOD"
 DEBUG = True
-API_KEY = 'jnsadklasdkmas/PROD_MOD'
+API_KEY = "jnsadklasdkmas/PROD_MOD"

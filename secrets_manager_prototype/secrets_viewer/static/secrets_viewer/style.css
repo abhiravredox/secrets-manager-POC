@@ -88,7 +88,6 @@ table.registered tr:active {
 table.registered {
     border: 1px solid;
     width: 100%;
-    height: 10%;
     text-align: center;
     border-collapse: collapse;
 }
@@ -129,6 +128,10 @@ table.secrets {
 table.secrets td, table.secrets th {
     border: 1px solid;
     padding: 4px 3px;
+}
+table.secrets tbody td{
+    word-break: break-word;
+    font-size: 18px;
 }
 
 table.secrets tbody td.right_col{
