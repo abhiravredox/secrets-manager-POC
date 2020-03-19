@@ -1,10 +1,17 @@
 import json
-from django.http import HttpResponse
-from django.core import serializers
-from secrets_api.models import Secret
 import random
 import string
+
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+from rest_framework.authentication import BasicAuthentication, TokenAuthentication
+from rest_framework.decorators import permission_classes, authentication_classes
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth import get_user, authenticate
+from django.core import serializers
+
+from secrets_api.models import Secret
+
 
 def get_secrets(request, env_name):
     return env_settings(env_name)
@@ -24,3 +31,7 @@ def env_settings(env_name):
     json_data['API_KEY'] = genrate_random_key(40) + "/" + env_name + "_API"
     json_data = json.dumps(json_data)
     return HttpResponse(json_data, content_type='application/json')
+
+@authentication_classes([TokenAuthentication, ])
+def auth_secrets(request, env_name):
+    return env_settings(env_name)

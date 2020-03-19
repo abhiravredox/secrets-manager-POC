@@ -26,13 +26,14 @@ class SecretsAbstract(metaclass=SingletonByArgument):
         headers=None,
         Auth=None,
     ):
-        self.secrets = None
+        self.env_name = env_name
         self.src = src
         self.auto_reload = auto_reload
         self.payload = payload
         self.headers = headers
         self.Auth = Auth
-        self.env_name = env_name
+        self.secrets = None
+        self.auth_parameters = None
         self.reload()
 
     def reload(self):
@@ -64,9 +65,6 @@ class ModuleSecrets(SecretsAbstract):
 
 class HTTPSecrets(SecretsAbstract):
     def auth_parameters_CLI(self):
-
-        if self.Auth is None:
-            return
         cli = str(
             input(
                 self.Auth.__name__
@@ -82,12 +80,13 @@ class HTTPSecrets(SecretsAbstract):
         return parameters
 
     def read_secrets(self):
-        auth_parameters = self.auth_parameters_CLI()
+        if self.auth_parameters is None and self.Auth is not None:
+            self.auth_parameters = self.auth_parameters_CLI()
         if self.payload is None:
             response = requests.get(
                 self.src,
-                auth=self.Auth(*auth_parameters)
-                if auth_parameters is not None
+                auth=self.Auth(*self.auth_parameters)
+                if self.auth_parameters is not None
                 else None,
             )
         else:
@@ -95,8 +94,8 @@ class HTTPSecrets(SecretsAbstract):
                 self.src,
                 data=self.payload,
                 headers=self.headers,
-                auth=self.Auth(*auth_parameters)
-                if auth_parameters is not None
+                auth=self.Auth(*self.auth_parameters)
+                if self.auth_parameters is not None
                 else None,
             )
         secrets = response.json()
