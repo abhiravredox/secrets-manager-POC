@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SECRET
+from .models import Secret
 # Register your models here.
 
-admin.site.register(SECRET)
+admin.site.register(Secret)

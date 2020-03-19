@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../api_secrets/.idea/api_secrets.iml" filepath="$PROJECT_DIR$/../api_secrets/.idea/api_secrets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../http_secrets_server/.idea/api_secrets.iml" filepath="$PROJECT_DIR$/../http_secrets_server/.idea/api_secrets.iml" />
       <module fileurl="file://$PROJECT_DIR$/../http_secrets_server/.idea/http_secrets_server.iml" filepath="$PROJECT_DIR$/../http_secrets_server/.idea/http_secrets_server.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/secrets_manager_prototype.iml" filepath="$PROJECT_DIR$/.idea/secrets_manager_prototype.iml" />
     </modules>

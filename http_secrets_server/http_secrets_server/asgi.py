@@ -1,5 +1,5 @@
 """
-ASGI config for api_secrets project.
+ASGI config for http_secrets_server project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'api_secrets.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'http_secrets_server.settings')
 
 application = get_asgi_application()

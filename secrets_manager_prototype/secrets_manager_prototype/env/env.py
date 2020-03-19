@@ -16,29 +16,29 @@ secrets_manager.register("module_dev", "DEV.py")
 secrets_manager.register("module_prod", "PROD.py")
 secrets_manager.register("module_test", "TEST.py")
 secrets_manager.register(
-    "http_get_dev", "http://127.0.0.1:8000/secrets/DEV/", auto_reload=True
+    "http_get_dev", "http://127.0.0.1:8080/secrets/DEV/", auto_reload=True
 )
 secrets_manager.register(
-    "http_get_prod", "http://127.0.0.1:8000/secrets/PROD/", auto_reload=True
+    "http_get_prod", "http://127.0.0.1:8080/secrets/PROD/", auto_reload=True
 )
 secrets_manager.register(
-    "http_get_test", "http://127.0.0.1:8000/secrets/TEST/", auto_reload=False
+    "http_get_test", "http://127.0.0.1:8080/secrets/TEST/", auto_reload=False
 )
 secrets_manager.register(
     "http_prod_dev",
-    "http://127.0.0.1:8000/secrets/",
+    "http://127.0.0.1:8080/secrets/",
     payload='{"env_name":"DEV"}',
     auto_reload=True,
 )
 secrets_manager.register(
     "http_prod_prod",
-    "http://127.0.0.1:8000/secrets/",
+    "http://127.0.0.1:8080/secrets/",
     payload='{"env_name":"PROD"}',
     auto_reload=True,
 )
 secrets_manager.register(
     "http_prod_test",
-    "http://127.0.0.1:8000/secrets/",
+    "http://127.0.0.1:8080/secrets/",
     payload='{"env_name":"TEST"}',
     auto_reload=False,
 )
