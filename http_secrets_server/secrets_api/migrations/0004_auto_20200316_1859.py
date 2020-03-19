@@ -6,13 +6,9 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('secrets_api', '0003_secret_debug'),
+        ("secrets_api", "0003_secret_debug"),
     ]
 
     operations = [
-        migrations.RenameField(
-            model_name='secret',
-            old_name='NAME',
-            new_name='name',
-        ),
+        migrations.RenameField(model_name="secret", old_name="NAME", new_name="name",),
     ]

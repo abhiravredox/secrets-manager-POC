@@ -7,18 +7,25 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='SECRET',
+            name="SECRET",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('SECRET_KEY', models.CharField(max_length=200)),
-                ('DEBUG', models.CharField(max_length=200)),
-                ('DB_DEFAULT_ENGINE', models.CharField(max_length=200)),
-                ('DB_DEFAULT_NAME', models.CharField(max_length=200)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("SECRET_KEY", models.CharField(max_length=200)),
+                ("DEBUG", models.CharField(max_length=200)),
+                ("DB_DEFAULT_ENGINE", models.CharField(max_length=200)),
+                ("DB_DEFAULT_NAME", models.CharField(max_length=200)),
             ],
         ),
     ]

@@ -6,21 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('secrets_api', '0001_initial'),
+        ("secrets_api", "0001_initial"),
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='secret',
-            name='DEBUG',
-        ),
-        migrations.RemoveField(
-            model_name='secret',
-            name='id',
-        ),
+        migrations.RemoveField(model_name="secret", name="DEBUG",),
+        migrations.RemoveField(model_name="secret", name="id",),
         migrations.AddField(
-            model_name='secret',
-            name='NAME',
-            field=models.CharField(default='', max_length=200, primary_key=True, serialize=False),
+            model_name="secret",
+            name="NAME",
+            field=models.CharField(
+                default="", max_length=200, primary_key=True, serialize=False
+            ),
         ),
     ]

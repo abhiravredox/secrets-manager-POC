@@ -6,16 +6,10 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('secrets_api', '0004_auto_20200316_1859'),
+        ("secrets_api", "0004_auto_20200316_1859"),
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='secret',
-            name='DB_DEFAULT_ENGINE',
-        ),
-        migrations.RemoveField(
-            model_name='secret',
-            name='DB_DEFAULT_NAME',
-        ),
+        migrations.RemoveField(model_name="secret", name="DB_DEFAULT_ENGINE",),
+        migrations.RemoveField(model_name="secret", name="DB_DEFAULT_NAME",),
     ]

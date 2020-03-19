@@ -10,7 +10,7 @@ def registred(request, env_name=None):
         env_name = secrets_manager.deploy_env
     template = loader.get_template("secrets_viewer/registered.html")
     secrets = secrets_manager.get_secrets(env_name)
-    base = secrets_manager.base
+    base = secrets_manager.base_env_name
     secrets_object = secrets_manager.env_secrets[env_name]
     secrets_types = [
         "Object yet to be instantiated"
@@ -38,7 +38,7 @@ def registred(request, env_name=None):
             "Payload": secrets_object.payload,
             "Headers": secrets_object.headers,
             "Auto Reload": secrets_object.auto_reload,
-            "Authentication": secrets_object.Auth.__name__
+            "Authentication": secrets_object.Auth.__name__ if secrets_object.Auth is not None else None,
         },
         "env_secrets_type": type(secrets_object).__name__,
     }
@@ -55,7 +55,7 @@ def deployed(request):
     env_name = secrets_manager.deploy_env
     template = loader.get_template("secrets_viewer/deployed.html")
     secrets = secrets_manager.get_secrets(env_name)
-    base = secrets_manager.base
+    base = secrets_manager.base_env_name
     secrets_object = secrets_manager.env_secrets[env_name]
     context = {
         "secrets": secrets,
@@ -70,7 +70,7 @@ def deployed(request):
             "Payload": secrets_object.payload,
             "Headers": secrets_object.headers,
             "Auto Reload": secrets_object.auto_reload,
-            "Authentication": secrets_object.Auth.__name__
+            "Authentication": secrets_object.Auth.__name__ if secrets_object.Auth is not None else None,
         },
         "env_secrets_type": type(secrets_object).__name__,
     }

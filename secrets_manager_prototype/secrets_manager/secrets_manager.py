@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from django.core.validators import URLValidator
 from secrets_manager.secrets import DotEnvSecrets, ModuleSecrets, HTTPSecrets
@@ -14,23 +15,40 @@ class Singleton(type):
 
 
 class SecretsManager(metaclass=Singleton):
-    def __init__(self, env_dir=None, default_env=None, lazy_loading=True):
+    def __init__(self, default_env_name=None, lazy_loading=True, auto_register=False):
         self.env = {}
         self.env_configs = {}
         try:
             self.deploy_env = os.environ["env"]
         except KeyError:
-            self.deploy_env = default_env
-        self.env_dir = str(env_dir) + "/"
+            self.deploy_env = default_env_name
+
+        root_path = str(Path(__file__).resolve(strict=True).parents[1])
+        project_name = os.path.basename(root_path)
+        self.env_dir = root_path + "/" + project_name + "/env/"
         self.is_base_set = False
         self.lazy_loading = lazy_loading
         self.env_secrets = {}
-        self.base = None
+        self.base_env_name = None
+        if auto_register:
+            self.auto_register()
+
+    def auto_register(self):
+        file_names = list(os.walk(self.env_dir))[0][2]
+        file_names = [file_name for file_name in file_names if file_name not in ['env.py', '__init__.py']]
+        for file_name in file_names:
+            env_name = "dot_env_" + file_name[1:]
+            if file_name.endswith(".py"):
+                env_name = "module_" + file_name[:-3]
+            self.register(env_name, file_name)
+            if 'base' in env_name:
+                self.set_base(env_name)
+
 
     def set_base(self, env_name):
         if env_name in self.env_configs:
             self.is_base_set = True
-            self.base = env_name
+            self.base_env_name = env_name
 
     def register(
         self, env_name, src, auto_reload=False, payload=None, headers=None, Auth=None
@@ -74,8 +92,8 @@ class SecretsManager(metaclass=Singleton):
         if env.auto_reload:
             self.reload_secrets(env=env)
         secrets = env.secrets
-        if self.is_base_set and env_name is not self.base:
-            all_secrets = self.get_secrets(self.base)
+        if self.is_base_set and env_name is not self.base_env_name:
+            all_secrets = self.get_secrets(self.base_env_name)
             all_secrets.update(secrets)
             return all_secrets
         return secrets
@@ -92,6 +110,6 @@ class SecretsManager(metaclass=Singleton):
             if env is not None:
                 del env
             del self.env_configs[env_name]
-        if env_name == self.base:
-            self.base = None
+        if env_name == self.base_env_name:
+            self.base_env_name = None
             self.is_base_set = False
