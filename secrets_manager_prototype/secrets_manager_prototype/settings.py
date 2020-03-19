@@ -11,50 +11,23 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 import json
 from pathlib import Path
-
+from secrets_manager_prototype.env import env
 from secrets_manager.secrets_manager import SecretsManager
 
-BASE_DIR = Path(__file__).resolve(strict=True).parents[1]
-ENV_DIR = Path(__file__).resolve(strict=True).parents[0]
-secrets_manager = SecretsManager(ENV_DIR, default_env='dev_mod')
-secrets_manager.register("base", 'base.py')
-secrets_manager.set_base("base")
-secrets_manager.register("dev_env", '.DEV')
-secrets_manager.unregister("dev_env")
-secrets_manager.register("dev_env", '.DEV')
-secrets_manager.register("prod_env", '.PROD')
-secrets_manager.register("test_env", '.TEST')
-secrets_manager.register("dev_mod", 'DEV.py')
-secrets_manager.register("prod_mod", 'PROD.py')
-secrets_manager.register("test_mod", 'TEST.py')
-secrets_manager.register("dev_api_get", 'http://127.0.0.1:8000/secrets/DEV/', auto_reload=True)
-secrets_manager.register("prod_api_get", 'http://127.0.0.1:8000/secrets/PROD/', auto_reload=True)
-secrets_manager.register("test_api_get", 'http://127.0.0.1:8000/secrets/TEST/', auto_reload=False)
-secrets_manager.register("dev_api_post", 'http://127.0.0.1:8000/secrets/', payload='{"env_name":"DEV"}',
-                         auto_reload=True)
-secrets_manager.register("prod_api_post", 'http://127.0.0.1:8000/secrets/', payload='{"env_name":"PROD"}',
-                         auto_reload=True)
-secrets_manager.register("test_api_post", 'http://127.0.0.1:8000/secrets/', payload='{"env_name":"TEST"}',
-                         auto_reload=False)
-SECRETS = secrets_manager.get_secrets()
-SECRET_KEY = SECRETS['SECRET_KEY']
-# for i in range(5):
-#     SECRETS = secrets_manager.get_secrets("prod_api_post")
-#     SECRET_KEY = SECRETS['SECRET_KEY']
-#     print(SECRET_KEY)
-#     API_KEY = SECRETS['API_KEY']
-#     print(API_KEY)
+secrets = SecretsManager().get_secrets()
 
-DEBUG = SECRETS['DEBUG']
-print(DEBUG)
+SECRET_KEY = secrets['SECRET_KEY']
+
+BASE_DIR = Path(__file__).resolve(strict=True).parents[1]
+
+DEBUG = secrets['DEBUG']
 
 DATABASES = {
     'default': {
-        'ENGINE': SECRETS['DB_DEFAULT_ENGINE'],
-        'NAME': BASE_DIR / SECRETS['DB_DEFAULT_NAME'],
+        'ENGINE': secrets['DB_DEFAULT_ENGINE'],
+        'NAME': BASE_DIR / secrets['DB_DEFAULT_NAME'],
     }
 }
-
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -124,5 +97,3 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-CORS_ORIGIN_WHITELIST = (
-)
