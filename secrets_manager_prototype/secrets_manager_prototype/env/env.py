@@ -1,9 +1,10 @@
 from pathlib import Path
-
+from requests.auth import HTTPDigestAuth
+from requests_oauthlib import OAuth1, OAuth2
 from secrets_manager.secrets_manager import SecretsManager
 
 ENV_DIR = Path(__file__).resolve(strict=True).parents[0]
-secrets_manager = SecretsManager(ENV_DIR, default_env='dev_mod', lazy_loading=False)
+secrets_manager = SecretsManager(ENV_DIR, default_env='dev_api_get')
 secrets_manager.register("base", 'base.py')
 secrets_manager.set_base("base")
 secrets_manager.register("dev_env", '.DEV')

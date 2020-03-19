@@ -37,17 +37,17 @@ class SecretsManager(metaclass=Singleton):
         else:
             raise EnvironmentError(env_name + " not registered with SecretsManager")
 
-    def register(self, env_name, src, auto_reload=False, payload=None, headers=None):
+    def register(self, env_name, src, auto_reload=False, payload=None, headers=None, Auth=None):
         if self.deploy_env is None:
             self.deploy_env = env_name
-        self.env_configs[env_name] = (src, auto_reload, payload, headers)
+        self.env_configs[env_name] = (src, auto_reload, payload, headers, Auth, env_name)
         if not self.lazy_loading:
             self.load_secrets(env_name)
 
     def load_secrets(self, env_name):
 
         if env_name not in self.env_secrets:
-            src, auto_reload, _, _ = self.env_configs[env_name]
+            src, auto_reload, _, _, _, _ = self.env_configs[env_name]
             try:
                 validate_url = URLValidator()
                 validate_url(src)
