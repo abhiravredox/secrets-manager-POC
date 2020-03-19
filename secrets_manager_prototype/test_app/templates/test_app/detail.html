@@ -19,10 +19,15 @@
         <tfoot>
         <tr>
             <td colspan="2">
+                {% if registered_page == 'active' %}
                 <button onclick="location.href='{% url 'reload_registered' env_name %}'">Force Reload</button>
+                    {% else %}
+                    <button onclick="location.href='{% url 'reload_deployed' %}'">Force Reload</button>
+                {% endif %}
             </td>
         </tr>
         </tfoot>
+
     </table>
 
 
