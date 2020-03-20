@@ -46,21 +46,21 @@ secrets_manager.register(
     auto_reload=False,
 )
 
-secrets_manager.register(
-    "http_get_with_auth_dev",
-    "http://127.0.0.1:8080/secrets/auth/DEV",
-    auto_reload=True,
-    Auth=HTTPDigestAuth,
-)
-secrets_manager.register(
-    "http_get_with_auth_prod",
-    "http://127.0.0.1:8080/secrets/auth/PROD",
-    auto_reload=True,
-    Auth=OAuth1,
-)
-secrets_manager.register(
-    "http_get_with_auth_test",
-    "http://127.0.0.1:8080/secrets/auth/TEST",
-    auto_reload=False,
-    Auth=OAuth2,
-)
+# secrets_manager.register(
+#     "http_get_with_auth_dev",
+#     "http://127.0.0.1:8080/secrets/auth/DEV",
+#     auto_reload=True,
+#     Auth=HTTPDigestAuth,
+# )
+# secrets_manager.register(
+#     "http_get_with_auth_prod",
+#     "http://127.0.0.1:8080/secrets/auth/PROD",
+#     auto_reload=True,
+#     Auth=OAuth1,
+# )
+# secrets_manager.register(
+#     "http_get_with_auth_test",
+#     "http://127.0.0.1:8080/secrets/auth/TEST",
+#     auto_reload=False,
+#     Auth=OAuth2,
+# )
