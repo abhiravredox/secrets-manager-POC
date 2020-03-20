@@ -1,0 +1,24 @@
+appdirs==1.4.3
+asgiref==3.2.5
+attrs==19.3.0
+black==19.10b0
+certifi==2019.11.28
+chardet==3.0.4
+click==7.1.1
+-e git+https://github.com/abhiravredox/django.git@3c35825009540e222311d591c7330fa17dd76c99#egg=Django
+django-environ==0.4.5
+djangorestframework==3.11.0
+environ==1.0
+idna==2.9
+isort==4.3.21
+oauthlib==3.1.0
+pathspec==0.7.0
+python-dotenv==0.12.0
+pytz==2019.3
+regex==2020.2.20
+requests==2.23.0
+requests-oauthlib==1.3.0
+sqlparse==0.3.1
+toml==0.10.0
+typed-ast==1.4.1
+urllib3==1.25.8
