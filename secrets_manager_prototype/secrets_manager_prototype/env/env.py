@@ -4,7 +4,7 @@ from requests_oauthlib import OAuth1, OAuth2
 from secrets_manager.secrets_manager import SecretsManager
 
 secrets_manager = SecretsManager(
-    default_env_name="http_get_with_auth_dev", auto_register=True
+    default_env_name="http_get_dev", auto_register=True
 )
 
 # Not required as auto_register=True
