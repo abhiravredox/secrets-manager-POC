@@ -35,15 +35,18 @@ class SecretsManager(metaclass=Singleton):
 
     def auto_register(self):
         file_names = list(os.walk(self.env_dir))[0][2]
-        file_names = [file_name for file_name in file_names if file_name not in ['env.py', '__init__.py']]
+        file_names = [
+            file_name
+            for file_name in file_names
+            if file_name not in ["env.py", "__init__.py"]
+        ]
         for file_name in file_names:
             env_name = "dot_env_" + file_name[1:]
             if file_name.endswith(".py"):
                 env_name = "module_" + file_name[:-3]
             self.register(env_name, file_name)
-            if 'base' in env_name:
+            if "base" in env_name:
                 self.set_base(env_name)
-
 
     def set_base(self, env_name):
         if env_name in self.env_configs:

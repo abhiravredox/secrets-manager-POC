@@ -38,7 +38,9 @@ def registred(request, env_name=None):
             "Payload": secrets_object.payload,
             "Headers": secrets_object.headers,
             "Auto Reload": secrets_object.auto_reload,
-            "Authentication": secrets_object.Auth.__name__ if secrets_object.Auth is not None else None,
+            "Authentication": secrets_object.Auth.__name__
+            if secrets_object.Auth is not None
+            else None,
         },
         "env_secrets_type": type(secrets_object).__name__,
     }
@@ -70,7 +72,9 @@ def deployed(request):
             "Payload": secrets_object.payload,
             "Headers": secrets_object.headers,
             "Auto Reload": secrets_object.auto_reload,
-            "Authentication": secrets_object.Auth.__name__ if secrets_object.Auth is not None else None,
+            "Authentication": secrets_object.Auth.__name__
+            if secrets_object.Auth is not None
+            else None,
         },
         "env_secrets_type": type(secrets_object).__name__,
     }

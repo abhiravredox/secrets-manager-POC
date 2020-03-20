@@ -1,5 +1,6 @@
 import abc
 import importlib
+import inspect
 
 import requests
 from dotenv import dotenv_values
@@ -65,27 +66,30 @@ class ModuleSecrets(SecretsAbstract):
 
 class HTTPSecrets(SecretsAbstract):
     def auth_parameters_CLI(self):
-        cli = str(
-            input(
-                self.Auth.__name__
-                + " Authentication defined for environment '"
-                + self.env_name
-                + "'.\n"
-                + "Enter parameters in appropriate order (Secrets Source Endpoint: "
-                + self.src
-                + "): "
-            )
+        parameters = list(inspect.signature(self.Auth.__init__).parameters)
+        parameters.remove("self")
+        print(
+            self.Auth.__name__
+            + " Authentication defined for environment '"
+            + self.env_name
+            + "'.\n"
+            + "Secrets Source Endpoint: "
+            + self.src
         )
-        parameters = tuple([token.strip() for token in cli.split(",")])
-        return parameters
+        kwargs = {}
+        for parameter in parameters:
+            value = input("Enter " + parameter + ":")
+            kwargs[parameter] = value
+        return kwargs
 
     def read_secrets(self):
         if self.auth_parameters is None and self.Auth is not None:
             self.auth_parameters = self.auth_parameters_CLI()
+            print()
         if self.payload is None:
             response = requests.get(
                 self.src,
-                auth=self.Auth(*self.auth_parameters)
+                auth=self.Auth(**self.auth_parameters)
                 if self.auth_parameters is not None
                 else None,
             )
@@ -94,7 +98,7 @@ class HTTPSecrets(SecretsAbstract):
                 self.src,
                 data=self.payload,
                 headers=self.headers,
-                auth=self.Auth(*self.auth_parameters)
+                auth=self.Auth(**self.auth_parameters)
                 if self.auth_parameters is not None
                 else None,
             )

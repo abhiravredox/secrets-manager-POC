@@ -1,11 +1,11 @@
-from pathlib import Path
-
 from requests.auth import HTTPDigestAuth
 from requests_oauthlib import OAuth1, OAuth2
 
 from secrets_manager.secrets_manager import SecretsManager
 
-secrets_manager = SecretsManager(default_env_name="module_dev", auto_register=True)
+secrets_manager = SecretsManager(
+    default_env_name="http_get_with_auth_dev", auto_register=True
+)
 # secrets_manager.set_base("module_test")
 secrets_manager.register(
     "http_get_dev", "http://127.0.0.1:8080/secrets/DEV/", auto_reload=True
@@ -35,12 +35,12 @@ secrets_manager.register(
     auto_reload=False,
 )
 
-# secrets_manager.register(
-#     "http_get_with_auth_dev",
-#     "http://127.0.0.1:8080/secrets/auth/DEV",
-#     auto_reload=True,
-#     Auth=HTTPDigestAuth,
-# )
+secrets_manager.register(
+    "http_get_with_auth_dev",
+    "http://127.0.0.1:8080/secrets/auth/DEV",
+    auto_reload=True,
+    Auth=HTTPDigestAuth,
+)
 # secrets_manager.register(
 #     "http_get_with_auth_prod",
 #     "http://127.0.0.1:8080/secrets/auth/PROD",
