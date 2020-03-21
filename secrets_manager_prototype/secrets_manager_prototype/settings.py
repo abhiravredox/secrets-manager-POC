@@ -15,11 +15,17 @@ from pathlib import Path
 from secrets_manager.secrets_manager import SecretsManager
 from secrets_manager_prototype.env import env
 
-secrets = SecretsManager().get_secrets()
-
-SECRET_KEY = secrets["SECRET_KEY"]
 
 BASE_DIR = Path(__file__).resolve(strict=True).parents[1]
+
+# secrets is a dict of secrets with keys set in the secrets source
+secrets = SecretsManager().get_secrets()
+
+# developer can force SecretsManager to return a particular environment
+# secrets = SecretsManager().get_secrets('http_get_test')
+
+
+SECRET_KEY = secrets["SECRET_KEY"]
 
 DEBUG = secrets["DEBUG"]
 

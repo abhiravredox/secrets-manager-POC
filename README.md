@@ -4,7 +4,7 @@ time to look at all the code. The part explaing important files is available in 
 
 ## About this POC
 This is a prototype for my own sanity check that my approach works. Consequently, things like exception handling and some edge
-cases have been overlooked.
+cases have been overlooked. Also, some functionalities are yet to be implemented.
 The POC consists of 2 projects:
   1. secrets_manager_prototype
   2. http_secrets_server (a project to act as a secrets store for testing HTTPSecrets)
