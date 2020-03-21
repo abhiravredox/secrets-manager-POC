@@ -55,14 +55,14 @@ get_secrets()/get_secrets(env_name) is triggered as per requirement to get secre
 ### <a href='https://github.com/abhiravredox/secrets-manager-POC/blob/master/secrets_manager_prototype/secrets_manager/secrets_manager.py'>secrets_manager.py</a> 
 In this prototype, secrets_manager.py resides in secrets_manager package. However, it will reside in the Django codebase 
 later.<br>
-The SecretsManager class is an instance of Singleton. Singleton is a design patten that ensures that only one object is 
-created throughout the project life cycle. This pattern facilitates the use of a SecretsManager instantialted once, to be used throughout the project in any other module.<br>
+The SecretsManager class is an instance of Singleton. Singleton is a design pattern that ensures that only one object is 
+created throughout the project life cycle. This pattern facilitates the use of a SecretsManager instantiated once, to be used throughout the project in any other module.<br>
 The SecretsManager's instantiating parameters define how the SecretsManager is constructed:
   1. default_env_name defines the default environment secrets source to be returned by default.
-       * --env passed to manage.py can override this
-       * env_name passed to get_secrets(env_name) can overide this
+       * --env=$env_name passed to manage.py can override this
+       * env_name passed to get_secrets(env_name) can override this
   2. lazy_loading defines if secrets sources are read when registered or when requested. (True by default)
-  3. auto_register defines if SecretsManager should automatically register .env and python module secret sources present 
+  3. auto_register defines if SecretsManager should automatically register .env and python module secrets sources present 
      in the env/ directory (False by default)
        * The naming convention for auto registered environment sources in the prototype can be viewed in SecretsManager's 
           instance method auto_register(). This convention is only for demonstration purposes and will be perfected later.
