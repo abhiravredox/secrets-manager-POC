@@ -59,14 +59,14 @@ The SecretsManager class is an instance of Singleton. Singleton is a design patt
 created throughout the project life cycle. This pattern facilitates the use of a SecretsManager instantialted once, to be used throughout the project in any other module.<br>
 The SecretsManager's instantiating parameters define how the SecretsManager is constructed:
   1. default_env_name defines the default environment secrets source to be returned by default.
-       a. --env passed to manage.py can override this
-       b. env_name passed to get_secrets(env_name) can overide this
+       * --env passed to manage.py can override this
+       * env_name passed to get_secrets(env_name) can overide this
   2. lazy_loading defines if secrets sources are read when registered or when requested. (True by default)
   3. auto_register defines if SecretsManager should automatically register .env and python module secret sources present 
      in the env/ directory (False by default)
-       a. The naming convention for auto registered environment sources in the prototype can be viewed in SecretsManager's 
+       * The naming convention for auto registered environment sources in the prototype can be viewed in SecretsManager's 
           instance method auto_register(). This convention is only for demonstration purposes and will be perfected later.
-       b. during automatic registration, if there is a source file that contains 'base' in it's name, that source will 
+       * during automatic registration, if there is a source file that contains 'base' in it's name, that source will 
           be set as the base.
 
 The SecretsManager's instance methods allow the developer work the required magic:
