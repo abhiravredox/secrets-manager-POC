@@ -1,5 +1,5 @@
 # Secrets Manager - Django GSoC
-A gist about the crux of this prototype is available <a href='https://gist.github.com/abhiravredox/cfb9fd5e8f9af6a1274a2cb68d7de05a'>here</a> as the Djnago community may not have the
+A gist about the crux of this prototype is available <a href='https://gist.github.com/abhiravredox/cfb9fd5e8f9af6a1274a2cb68d7de05a'>here</a> as the Django community may not have the
 time to look at all the code. The part explaing important files is available in this README as well.
 
 ## About this POC
