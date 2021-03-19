@@ -7,7 +7,7 @@ chardet==3.0.4
 click==7.1.1
 -e git+https://github.com/abhiravredox/django.git@3c35825009540e222311d591c7330fa17dd76c99#egg=Django
 django-environ==0.4.5
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 environ==1.0
 idna==2.9
 isort==4.3.21
