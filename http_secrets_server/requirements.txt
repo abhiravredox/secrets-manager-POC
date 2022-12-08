@@ -2,7 +2,7 @@ appdirs==1.4.3
 asgiref==3.2.5
 attrs==19.3.0
 black==19.10b0
-certifi==2019.11.28
+certifi==2022.12.7
 chardet==3.0.4
 click==7.1.1
 -e git+https://github.com/abhiravredox/django.git@3c35825009540e222311d591c7330fa17dd76c99#egg=Django
